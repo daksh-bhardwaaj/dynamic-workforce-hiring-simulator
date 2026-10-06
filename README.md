@@ -1,9 +1,18 @@
 Dynamic Workforce & Hiring Planning Simulator
-A data analytics project that combines Python, MySQL, Excel, and Power BI to analyze workforce capacity and estimate hiring requirements under different workload scenarios.
-The goal of this project was to build something closer to a real workforce planning workflow rather than just creating a dashboard from a clean dataset. I started with messy employee data, cleaned and validated it using Python, performed workforce analysis in MySQL, and then used Power BI to build an interactive hiring simulator.
+A data analytics project built with Python, MySQL, Excel, and Power BI to analyze workforce capacity, costs, staffing gaps, and projected hiring requirements under different workload scenarios.
+The project follows a practical analytics workflow, starting with messy employee data and ending with an interactive Power BI hiring simulator.
+Dashboard Screenshot
+ 
 Project Overview
-Workforce planning is not only about knowing how many employees a company has. A business also needs to understand how much capacity those employees provide, what the workforce costs, where capacity shortages exist, and how many additional employees may be required when workload increases.
-This project addresses those questions through a simple analytical workflow:
+The project analyzes:
+- Workforce headcount
+- Employee capacity
+- Workforce costs
+- Department and location distribution
+- Capacity shortages
+- Projected hiring requirements
+- Workload-based hiring scenarios
+Workflow
 Raw Workforce Data
         |
         v
@@ -16,30 +25,18 @@ Workforce Analysis & Business Logic
         |
         v
 Power BI
-Interactive Dashboard & Hiring Simulator
+Dashboard & Hiring Simulator
 
 Tech Stack
-- Python
-  - Pandas
-  - Data cleaning and validation
-  - Excel/CSV processing
-- MySQL
-  - Data storage
-  - Aggregations
-  - Workforce cost analysis
-  - Capacity analysis
-  - Hiring-gap calculations
-  - SQL views
-- Power BI
-  - KPI dashboard
-  - Workforce analysis
-  - Department and location analysis
-  - What-if workload simulation
-- Excel
-  - Initial source dataset
-  - Cleaned dataset export
+Technology	Purpose
+Python / Pandas	Data cleaning and validation
+MySQL	Data storage and workforce analysis
+Power BI	Dashboard and scenario analysis
+Excel / CSV	Source and processed data
+
+
 Dataset
-The original dataset contains approximately 12,500 employee records with the following fields:
+The dataset contains approximately 12,500 employee records with:
 Column	Description
 Emp_ID	Employee identifier
 Department	Employee department
@@ -47,94 +44,81 @@ Location	Employee location
 Hire_Date	Employee hiring date
 Status	Employment status
 Base_Salary_USD	Annual base salary
-Weekly_Capacity_Hrs	Available working hours per week
+Weekly_Capacity_Hrs	Available weekly working hours
 Performance_Rating	Employee performance rating
 
 
-The dataset intentionally contains messy text, missing values, and numerical outliers so that the project includes a realistic data-cleaning stage.
-Phase 1: Data Cleaning with Python
-The first stage was performed using Pandas.
-The main cleaning tasks included:
-- Loading the Excel dataset
-- Inspecting rows, columns, data types, and missing values
-- Standardizing department, location, and status values
-- Removing unnecessary whitespace from text fields
-- Handling missing categorical values
-- Handling missing performance ratings using the median
-- Identifying invalid salary values
-- Identifying invalid weekly capacity values
-- Converting hire dates into proper datetime format
-- Validating the cleaned dataset
-- Exporting the cleaned dataset to Excel and CSV
-For numerical fields containing outliers, the median was used where appropriate because it is less affected by extreme values than the mean.
-Phase 2: Workforce Analysis with MySQL
-The cleaned employee data was imported into MySQL for business analysis.
-The SQL analysis covers:
-Workforce Headcount
+The dataset intentionally contains messy text, missing values, and numerical outliers to simulate a realistic data-cleaning workflow.
+Phase 1: Python Data Cleaning
+Using Pandas, I:
+- Inspected data types and missing values
+- Standardized text fields
+- Removed unnecessary whitespace
+- Handled missing categorical values
+- Imputed missing performance ratings
+- Identified invalid salary and capacity values
+- Converted hiring dates to datetime
+- Validated the cleaned dataset
+- Exported the processed data to Excel and CSV
+Phase 2: MySQL Workforce Analysis
+The cleaned dataset was imported into MySQL for business analysis.
+Headcount Analysis
 - Total employees
 - Active employees
-- Workforce status distribution
+- Workforce status
 - Department-wise headcount
 - Location-wise headcount
 Workforce Cost
 - Average salary
 - Total annual salary cost
-- Department-wise salary cost
-- Department-wise average salary
+- Department-level salary cost
 Workforce Capacity
-- Total available weekly capacity
-- Capacity by department
-- Average capacity per employee
+- Total weekly capacity
+- Department-level capacity
+- Average employee capacity
 Hiring Analysis
-The project compares available employee capacity against an assumed weekly workload requirement.
-The simplified planning model uses:
-Required Hours - Available Hours = Capacity Gap
+The project compares required workload against available workforce capacity:
+Capacity Gap = Required Hours - Available Hours
 
-The capacity gap is then converted into an estimated number of employees required using a 40-hour work week:
-Capacity Gap / 40 = Estimated Employees Required
+The capacity gap is then converted into an estimated hiring requirement using a 40-hour work week:
+Employees Required = Capacity Gap / 40
 
-A SQL view was also created to provide a summarized department-level dataset for reporting.
+A SQL view was created to provide summarized department-level workforce metrics.
 Phase 3: Power BI Dashboard
-The final Power BI dashboard brings the analysis together into an interactive workforce planning view.
-Key KPIs
+The Power BI dashboard contains:
 - Total Employees
 - Active Employees
 - Annual Salary Cost
 - Weekly Workforce Capacity
 - Projected Hiring Requirement
-Dashboard Analysis
-The dashboard includes:
-- Active employees by department
-- Active employees by location
-- Workforce status distribution
-- Workforce capacity gap by department
-- Projected hiring requirement by department
+- Active Employees by Department
+- Active Employees by Location
+- Workforce Status
+- Workforce Capacity Gap
+- Projected Hiring Requirement by Department
 What-If Hiring Simulator
-The main interactive feature of the dashboard is a Required Weekly Workload parameter.
-The user can change the expected workload and see how the projected hiring requirement changes.
-For example:
-Higher workload
+The dashboard includes a Required Weekly Workload parameter.
+Changing the workload allows the user to evaluate how projected hiring requirements change under different scenarios.
+Higher Workload
        |
        v
-Higher capacity requirement
+Higher Capacity Requirement
        |
        v
-Larger staffing gap
+Larger Staffing Gap
        |
        v
-Higher projected hiring requirement
+Higher Hiring Requirement
 
-This allows the dashboard to be used as a simple scenario-planning tool rather than only a historical reporting dashboard.
 Key Business Questions
-The project is designed to answer questions such as:
+The project helps answer:
 1. How many employees are currently active?
 2. Which departments have the largest workforce?
 3. Which locations have the most employees?
 4. What is the estimated annual salary cost?
-5. How much weekly capacity does the current workforce provide?
-6. Which departments have a capacity shortage?
-7. How does increasing workload affect hiring requirements?
-8. Which departments may require the most additional employees?
+5. How much weekly capacity is available?
+6. Which departments have capacity shortages?
+7. How does increased workload affect hiring requirements?
 Project Structure
 Dynamic-Workforce-Hiring-Simulator/
 │
@@ -153,18 +137,17 @@ Dynamic-Workforce-Hiring-Simulator/
 │   └── workforce_dashboard.pbix
 │
 └── screenshots/
-    └── dashboard.png
+    └── dashboard.jpeg
 
-Important Assumptions
+Assumptions
 This is a portfolio project using a synthetic workforce dataset.
-The hiring simulation uses simplified assumptions:
-- Required workload is treated as a weekly requirement per department.
-- One full-time employee is assumed to provide 40 working hours per week.
-- Hiring requirements are estimated from available capacity versus required workload.
-- Salary calculations represent base salary only and do not include benefits, bonuses, taxes, or other employment costs.
-These assumptions are intentionally kept simple so that the business logic remains easy to understand and explain.
+- Workload is modeled as a weekly requirement per department.
+- One full-time employee is assumed to provide 40 hours per week.
+- Hiring requirements are estimated from capacity gaps.
+- Salary calculations include base salary only.
+These assumptions keep the model simple and focused on demonstrating the analytics workflow.
 What I Learned
-This project helped me practice the complete flow of a basic data analytics project:
+This project helped me practice an end-to-end data analytics workflow:
 Raw Data
    ↓
 Data Cleaning
@@ -175,18 +158,17 @@ SQL Analysis
    ↓
 Business Metrics
    ↓
-Dashboard
+Power BI Dashboard
    ↓
 Scenario Analysis
 
-More importantly, it helped me understand how technical work connects to a business question. Instead of only calculating headcount or creating charts, the project uses employee capacity and workload assumptions to estimate a potential hiring requirement.
+The main focus was understanding how cleaned data and business logic can be transformed into insights that support workforce planning decisions.
 Future Improvements
-If this project were extended further, I would consider adding:
-- Historical monthly workforce trends
+Potential extensions include:
+- Historical workforce trends
 - Department-specific workload requirements
 - Attrition forecasting
 - Hiring cost estimates
 - Recruitment timelines
-- Multiple workload scenarios
 - Employee tenure analysis
-- Forecasted workforce requirements
+- Workforce demand forecasting
