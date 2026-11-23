@@ -24,7 +24,7 @@ The project analyzes:
 - **Projected hiring requirements**
 - **Workload-based hiring scenarios**
 
-### Project Workflow
+### Project workflow
 
 ```text
 Raw Workforce Data
