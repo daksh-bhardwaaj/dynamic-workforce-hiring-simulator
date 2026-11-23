@@ -46,7 +46,7 @@ Technology	Purpose
 Python / Pandas	Data cleaning and validation
 MySQL	Data storage and workforce analysis
 Power BI	Dashboard and scenario analysis
-Excel / CSV	Source and processed data
+Excel / CSV	Source and processed Data
 
 
 Dataset
