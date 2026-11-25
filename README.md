@@ -16,7 +16,7 @@ The project follows a practical analytics workflow, starting with messy employee
 
 The project analyzes:
 
-- **Workforce headcount**
+- **Workforce Headcount**
 - **Employee capacity**
 - **Workforce costs**
 - **Department and location distribution**
